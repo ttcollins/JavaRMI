@@ -78,6 +78,7 @@ public class HotelClient {
         if(args.length < 2)
             printUsage();
 
+        //java  localhost HotelClient
         try{
             Hotel c = (Hotel) Naming.lookup("rmi://" + args[0] + "/HotelService");
             if(args[1].compareTo("list") == 0)

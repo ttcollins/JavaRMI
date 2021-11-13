@@ -5,10 +5,15 @@ import java.util.ArrayList;
 @SuppressWarnings("unchecked")
 public class HotelImpl extends UnicastRemoteObject implements Hotel{
 
+    //declares an array called capacity of type int and fills the number of rooms under each type
     final static int[] capacity = {10, 20, 20};
+
+    //arrayList rooms to store information about the various types of rooms
     ArrayList<String>[] rooms = (ArrayList<String>[])new ArrayList[]{
-            new ArrayList<String>(), new ArrayList<String>(), new ArrayList<String>()
-    } ;
+            new ArrayList<String>(),
+            new ArrayList<String>(),
+            new ArrayList<String>()
+    };
 
     public HotelImpl() throws RemoteException {
         super();
