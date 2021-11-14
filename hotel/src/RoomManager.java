@@ -7,6 +7,27 @@ import java.rmi.RemoteException;
 public interface RoomManager extends Remote {
 
     /**
+     * These are the existing rooms in the array indices that represent the room types
+     * rooms[0] - type 0
+     * rooms[1] - type 1
+     * rooms[2] - type 2
+     * rooms[3] - type 3
+     * rooms[4] - type 4
+     */
+    final int[] rooms = {10, 20, 5, 3, 2};
+
+    /**
+     * These are the descriptions to the various room types in the respective indicies
+     */
+    final String[] descriptions = {"Single rooms", "Double rooms", "Twin rooms", "Triple rooms", "Quad rooms"};
+
+    /**
+     * These are the prices to the various room types in the respective indicies
+     */
+    final int[] prices = {55000, 75000, 80000, 150000, 230000};
+
+
+    /**
      * This lists the available rooms in each price range
      * @return the available rooms
      * @throws RemoteException

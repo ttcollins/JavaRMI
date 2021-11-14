@@ -50,7 +50,6 @@ public class HotelImpl extends UnicastRemoteObject implements Hotel{
 
         if(rooms[type-1].size() < capacity[type-1] ){
             if(rooms[type-1].add(guest)){
-                //add room type booked
                 System.out.println("Booked room for " + guest);
                 return true;
             }
