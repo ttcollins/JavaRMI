@@ -2,10 +2,11 @@ import java.rmi.Naming;
 
 public class HotelClient {
 
-    /**
-     * This method prints the options available for the program and successfully exits
-     */
+
+
     private static void printOptions() {
+
+        //This method prints the options available for the program and successfully exits
         System.out.println("Available options:\n\tHotelClient list <server address> \n" +
                 "\tHotelClient book <server address> <type> <guest name>\n" +
                 "\tHotelClient guests <server address> \n" +
@@ -14,28 +15,24 @@ public class HotelClient {
         System.exit(0);
     }
 
+
+
     private static void booking(String[] args, RoomManager r) {
         String guest = "";
 
-        /**
-         * check if book <server address> <room type> and <guest name> have been provided
-         */
+        //check if book <server address> <room type> and <guest name> have been provided
         if(args.length < 4) {
             printOptions();
         }
 
-        /**
-         * Add all provided guest names to the String guest
-         */
+        //Add all provided guest names to the String guest
         for(int i = 3; i< args.length; i++){
             if(i!=3)
                 guest += " ";
             guest += args[i];
         }
 
-        /**
-         * Calling the book method from the server
-         */
+        //Calling the book method from the server
         try {
             if(!r.book(Integer.parseInt(args[2]), guest)) {
                 System.out.println("Booking Failed...");
@@ -50,18 +47,45 @@ public class HotelClient {
         }
     }
 
+
+    private static void revenue(RoomManager r) {
+
+        try {
+            int[] roomRevenues ;
+            int totalRevenue = 0;
+
+            roomRevenues = r.revenue(); //Calling the revenue method from the server and storing them in an array
+
+            for(int i=0; i< r.rooms.length; i++){
+                totalRevenue += roomRevenues[i];
+            }
+            System.out.println("Total revenue: " + totalRevenue );
+
+            System.out.println("Room types--------revenue generated");
+            for(int i=0; i< r.rooms.length; i++){
+                System.out.println( i + "\t \t revenue:" + roomRevenues[i]); //prints each of the revenue breakdowns
+            }
+        } catch(Exception e) {
+            System.out.println("Received exception:" + e);
+        }
+    }
+
+
     public static void main(String[] args) {
-        /**
-         * This will print the options if no specific method and server address are provided
-         */
+
+        //This will print the options if no specific method and server address are provided
         if(args.length < 2) {
             printOptions();
         }
 
         try {
             RoomManager r = (RoomManager) Naming.lookup("rmi://" + args[1] + "/HotelService");
-            if(args[0].equals("book")){
+            if(args[0].equals("book")) {
                 booking(args, r);
+            }
+
+            if(args[0].equals("revenue")){
+                revenue(r);
             }
         } catch(Exception e) {
             System.out.println("Received exception: " + e);
