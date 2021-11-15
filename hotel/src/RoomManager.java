@@ -19,12 +19,16 @@ public interface RoomManager extends Remote {
     /**
      * These are the descriptions to the various room types in the respective indicies
      */
+
     String[] descriptions = {"Single rooms", "Double rooms", "Twin rooms", "Triple rooms", "Quad rooms"};
+
 
     /**
      * These are the prices to the various room types in the respective indicies
      */
+
     int[] prices = {55000, 75000, 80000, 150000, 230000};
+
 
 
     /**

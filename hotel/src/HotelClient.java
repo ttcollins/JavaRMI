@@ -17,6 +17,14 @@ public class HotelClient {
 
 
 
+
+
+    /**
+     * This method invoces the book method on the server.
+     * @param args
+     * @param r
+     */
+
     private static void booking(String[] args, RoomManager r) {
         String guest = "";
 
@@ -48,6 +56,7 @@ public class HotelClient {
     }
 
 
+
     private static void revenue(RoomManager r) {
 
         try {
@@ -71,6 +80,33 @@ public class HotelClient {
     }
 
 
+    /**
+     * This method invokes the guests method on the server
+     * @param r
+     */
+    private static void guestDetails(RoomManager r){
+        try{
+            /**
+             * Storing whatever is returned by the server into an array
+             */
+            String[] guests = r.guests();
+
+            /**
+             * Checking the array to see if anyone really booked
+             */
+            if(guests.length < 1) {
+                System.out.println("Nobody has booked yet...");
+            } else {
+                for(int i=0; i< guests.length; i++){
+                    System.out.println(guests[i]);
+                }
+            }
+        } catch (Exception e){
+            System.out.println("Received exception: "+e);
+        }
+    }
+
+
     public static void main(String[] args) {
 
         //This will print the options if no specific method and server address are provided
@@ -82,6 +118,8 @@ public class HotelClient {
             RoomManager r = (RoomManager) Naming.lookup("rmi://" + args[1] + "/HotelService");
             if(args[0].equals("book")) {
                 booking(args, r);
+            } else if(args[0].equals("guests")) {
+                guestDetails(r);
             }
 
             if(args[0].equals("revenue")){
