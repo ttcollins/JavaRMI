@@ -60,7 +60,24 @@ public class RoomManagerImpl extends UnicastRemoteObject implements RoomManager 
 
     @Override
     public String[] guests() throws RemoteException {
-        return new String[0];
+        int i, j, counter=0;
+        /**
+         * Making an array of size equalling to the number of guests that booked
+         */
+        String[] guestList = new String[ guests[0].size() + guests[1].size() +
+                guests[2].size() + guests[3].size() + guests[4].size() + 5];
+
+        /**
+         * Outer loop for the five arraylists.
+         * Inner loop to get the details of each arraylist.
+         */
+        for(i=0; i<5; i++){
+            guestList[counter++] = "===Room Type " + i + " ===";
+            for(j=0; j<guests[i].size(); j++){
+                guestList[counter++] = guests[i].get(j);
+            }
+        }
+        return guestList;
     }
 
     @Override
