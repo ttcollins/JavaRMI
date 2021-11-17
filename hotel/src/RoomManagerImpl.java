@@ -23,7 +23,17 @@ public class RoomManagerImpl extends UnicastRemoteObject implements RoomManager 
 
     @Override
     public int[] list() throws RemoteException {
-        return new int[0];
+        int[] rm = new int[5];
+
+        // get number of remaining rooms and assign it in rm
+        rm[0] = rooms[0]- guests[0].size();
+        rm[1] = rooms[1]- guests[1].size();
+        rm[2] = rooms[2]- guests[2].size();
+        rm[3] = rooms[3]- guests[3].size();
+        rm[4] = rooms[4]- guests[4].size();
+
+        return rm;
+
     }
 
     /**
