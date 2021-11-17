@@ -2,29 +2,21 @@ import java.rmi.Naming;
 
 public class HotelClient {
 
-
-
     private static void printOptions() {
-
         //This method prints the options available for the program and successfully exits
-        System.out.println("Available options:\n\tHotelClient list <server address> \n" +
-                "\tHotelClient book <server address> <type> <guest name>\n" +
-                "\tHotelClient guests <server address> \n" +
-                "\tHotelClient revenue <server address> \n");
+        System.out.println("Available options:\n\t1. java HotelClient list <server address> \n" +
+                "\t2. java HotelClient book <server address> <type> <guest name>\n" +
+                "\t3. java HotelClient guests <server address> \n" +
+                "\t4. java HotelClient revenue <server address> \n");
 
         System.exit(0);
     }
-
-
-
-
 
     /**
      * This method invoces the book method on the server.
      * @param args
      * @param r
      */
-
     private static void booking(String[] args, RoomManager r) {
         String guest = "";
 
@@ -55,8 +47,10 @@ public class HotelClient {
         }
     }
 
-
-
+    /**
+     * This method invokes the revenue method on the server
+     * @param r
+     */
     private static void revenue(RoomManager r) {
 
         try {
@@ -79,21 +73,16 @@ public class HotelClient {
         }
     }
 
-
     /**
      * This method invokes the guests method on the server
      * @param r
      */
     private static void guestDetails(RoomManager r){
         try{
-            /**
-             * Storing whatever is returned by the server into an array
-             */
+            //Storing whatever is returned by the server into an array
             String[] guests = r.guests();
 
-            /**
-             * Checking the array to see if anyone really booked
-             */
+             //Checking the array to see if anyone really booked
             if(guests.length < 1) {
                 System.out.println("Nobody has booked yet...");
             } else {
@@ -106,7 +95,10 @@ public class HotelClient {
         }
     }
 
-
+    /**
+     * This is the main method to which all commands from the terminal arrive
+     * @param args
+     */
     public static void main(String[] args) {
 
         //This will print the options if no specific method and server address are provided
