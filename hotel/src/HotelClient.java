@@ -73,6 +73,24 @@ public class HotelClient {
         }
     }
 
+    public static void list (RoomManager r){
+        try{ 
+
+        int[] p = new int[5]; 
+        p = r.list();
+
+        String[] cost= {"55,000", "75,000", "80,000", "150,000", "230,000"};
+        
+        //prints out available rooms for each tpye and the respective price
+        for (int i=0;i<5;i++){
+            System.out.println( p[i] + " rooms of type " + i + "are available for " + cost[i] + " UGX per night");
+        }   
+        }
+        catch (Exception e){
+            System.out.println("Received exception: "+e);
+        }
+    }
+    
     /**
      * This method invokes the guests method on the server
      * @param r
@@ -116,6 +134,10 @@ public class HotelClient {
 
             if(args[0].equals("revenue")){
                 revenue(r);
+            }
+
+            if (args[0].equals("list")){
+                list(r);
             }
         } catch(Exception e) {
             System.out.println("Received exception: " + e);
