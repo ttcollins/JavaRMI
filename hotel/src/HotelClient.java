@@ -2,6 +2,10 @@ import java.rmi.Naming;
 
 public class HotelClient {
 
+    /**
+     * This method when called provides the various options to
+     * use to execute actions on this program
+     */
     private static void printOptions() {
         //This method prints the options available for the program and successfully exits
         System.out.println("Available options:\n\t1. java HotelClient list <server address> \n" +
@@ -13,7 +17,7 @@ public class HotelClient {
     }
 
     /**
-     * This method invokes the book method on the server.
+     * This method invokes book() on the server.
      * @param args
      * @param r
      */
@@ -48,7 +52,7 @@ public class HotelClient {
     }
 
     /**
-     * This method invokes the revenue method on the server
+     * This method invokes revenue() on the server
      * @param r
      */
     private static void revenue(RoomManager r) {
@@ -73,18 +77,23 @@ public class HotelClient {
         }
     }
 
+    /**
+     * This method invokes list() on the server
+     * @param r
+     */
     public static void list (RoomManager r){
-        try{ 
+        try{
+            //array to store what is returned by list() from the server
+            int[] p = new int[5];
+            p = r.list();
 
-        int[] p = new int[5]; 
-        p = r.list();
+            //properly formatted room costs
+            String[] cost= {"55,000", "75,000", "80,000", "150,000", "230,000"};
 
-        String[] cost= {"55,000", "75,000", "80,000", "150,000", "230,000"};
-        
-        //prints out available rooms for each tpye and the respective price
-        for (int i=0;i<5;i++){
-            System.out.println( p[i] + " rooms of type " + i + "are available for " + cost[i] + " UGX per night");
-        }   
+            //prints out available rooms for each tpye and the respective price
+            for (int i=0;i<5;i++){
+                System.out.println( p[i] + " rooms of type " + i + "are available for " + cost[i] + " UGX per night");
+            }
         }
         catch (Exception e){
             System.out.println("Received exception: "+e);
@@ -92,7 +101,7 @@ public class HotelClient {
     }
     
     /**
-     * This method invokes the guests method on the server
+     * This method invokes guests() on the server
      * @param r
      */
     private static void guestDetails(RoomManager r){
@@ -126,17 +135,15 @@ public class HotelClient {
 
         try {
             RoomManager r = (RoomManager) Naming.lookup("rmi://" + args[1] + "/HotelService");
+
+            //checks on the commands entered to refer them to the right actions
             if(args[0].equals("book")) {
                 booking(args, r);
             } else if(args[0].equals("guests")) {
                 guestDetails(r);
-            }
-
-            if(args[0].equals("revenue")){
+            } else if(args[0].equals("revenue")){
                 revenue(r);
-            }
-
-            if (args[0].equals("list")){
+            } else if(args[0].equals("list")){
                 list(r);
             }
         } catch(Exception e) {

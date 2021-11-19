@@ -21,17 +21,21 @@ public class RoomManagerImpl extends UnicastRemoteObject implements RoomManager 
         super();
     }
 
+    /**
+     *
+     * @return an array of type int containing all free rooms
+     * @throws RemoteException
+     */
     @Override
     public int[] list() throws RemoteException {
+        //array to save the free rooms
         int[] rm = new int[5];
 
         // get number of remaining rooms and assign it in rm
         for (int x=0; x<5; x++){
             rm[x] = rooms[x]- guests[x].size();
         }
-        
         return rm;
-
     }
 
     /**
