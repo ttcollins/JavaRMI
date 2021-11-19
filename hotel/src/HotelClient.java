@@ -13,7 +13,7 @@ public class HotelClient {
     }
 
     /**
-     * This method invoces the book method on the server.
+     * This method invokes the book method on the server.
      * @param args
      * @param r
      */

@@ -84,14 +84,14 @@ public class RoomManagerImpl extends UnicastRemoteObject implements RoomManager 
      */
     @Override
     public int[] revenue() throws RemoteException {
-
+        //initializing an array to hold the revenue from various types of rooms
         int[] roomRevenues = new int[rooms.length];
 
-        //loop to calculate the revenues and store them in an array
+        //loop to calculate the revenues and store them in the array above
         for(int i=0; i < rooms.length ; i++) {
-         int numberOfGuestsInRoomType = guests[i].size();
-         int roomRevenue = numberOfGuestsInRoomType * prices[i];
-         roomRevenues[i] = roomRevenue;
+            int numberOfGuestsInRoomType = guests[i].size();
+            int roomRevenue = numberOfGuestsInRoomType * prices[i];
+            roomRevenues[i] = roomRevenue;
         }
         return roomRevenues;
     }
